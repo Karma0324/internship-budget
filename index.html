@@ -1868,7 +1868,9 @@ function launchConfetti(originEl) {
 function copyShareLink() {
   try {
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(getShareableState()))));
-    const url = location.origin + location.pathname + '#' + encoded;
+    const url = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+      ? 'https://karma0324.github.io/internship-budget/#' + encoded
+      : location.origin + location.pathname + '#' + encoded;
     navigator.clipboard.writeText(url).then(() => {
       const btn = document.getElementById('share-btn');
       if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = '⤴ Share link', 1800); }
